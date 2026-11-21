@@ -7,26 +7,23 @@ Private, not published to npm.
 
 ## Contents
 
-Declared in the `pi` manifest in `package.json`:
+Loaded by pi (declared in the `pi` manifest in `package.json`):
 
-| Resource | Path | Name | What it does |
-| --- | --- | --- | --- |
-| Extension | `extensions/index.ts` | — | Registers the commands below |
-| Command | `extensions/index.ts` | `/pick` | Interactive selection dialog (`SelectList` TUI) |
-| Theme | `themes/setup.json` | `setup` | Custom color theme, all 51 tokens |
+| Title | Purpose | Source |
+| --- | --- | --- |
+| `/pick` command | Interactive selection dialog (`SelectList` TUI). Placeholder kept as a working reference for `ctx.ui.custom()` | `extensions/index.ts` |
+| `setup` theme | Custom color scheme, all 51 tokens required by pi | `themes/setup.json` |
 
-Repo-level tooling (not loaded by pi):
+Repo tooling (not loaded by pi):
 
-| Path | Purpose |
-| --- | --- |
-| `AGENTS.md` | Project context and development workflow for coding agents |
-| `.agents/skills/pi-package/` | Patterns for building pi packages |
-| `.agents/skills/pi-test/` | TUI testing with [pilotty](https://github.com/msmps/pilotty) |
-| `biome.json`, `tsconfig.json` | Lint/format and type-check config |
-| `.github/workflows/ci.yml` | Typecheck + lint on push |
-
-The extension is currently a placeholder: `/pick` is kept as a working
-reference for `ctx.ui.custom()` + `SelectList`.
+| Title | Purpose | Source |
+| --- | --- | --- |
+| Project context | Development loop, test modes, pitfalls for coding agents | `AGENTS.md` |
+| `pi-package` skill | Patterns for building extensions, tools, schemas, themes, skills, prompts | `.agents/skills/pi-package/` |
+| `pi-test` skill | Automated TUI testing recipes with pilotty | `.agents/skills/pi-test/` |
+| Lint and formatting | Biome, 2-space indent, 100-column lines | `biome.json` |
+| Type check | `tsc --noEmit` over `extensions/**` | `tsconfig.json` |
+| CI | Typecheck and lint on push and pull request | `.github/workflows/ci.yml` |
 
 ## Install
 
