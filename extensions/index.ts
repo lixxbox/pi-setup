@@ -1,48 +1,19 @@
 /**
  * pi-setup — personal extension
  *
- * Placeholder implementations of the core extension capabilities:
- *   1. Custom tool (callable by the LLM)      — `hello`
- *   2. Slash commands (callable by the user)  — `/hello`, `/pick`
- *   3. Event handler (session lifecycle)      — `session_start`
+ * Currently a placeholder: `/pick` is kept as a working reference for
+ * `ctx.ui.custom()` + `SelectList`. Real functionality goes here as the
+ * setup grows (see AGENTS.md for the development loop).
  *
- * Replace these with real functionality as the setup grows.
+ * Patterns not yet used: tools, event handlers, keybindings, widgets,
+ * tool renderers, custom providers.
  */
 
 import { DynamicBorder, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { Container, type SelectItem, SelectList, Text } from "@earendil-works/pi-tui";
-import { Type } from "typebox";
 
 export default function (pi: ExtensionAPI) {
-  // ── 1. Custom tool ────────────────────────────────────────────────
-  // The LLM can call this tool when the user asks it to greet someone.
-  pi.registerTool({
-    name: "hello",
-    label: "Hello",
-    description: "Greet someone by name. Returns a friendly greeting.",
-    parameters: Type.Object({
-      name: Type.String({ description: "Name to greet" }),
-    }),
-    async execute(_toolCallId, params, _signal, _onUpdate, _ctx) {
-      return {
-        content: [{ type: "text", text: `Hello, ${params.name}! 👋` }],
-        details: { greeted: params.name },
-      };
-    },
-  });
-
-  // ── 2a. Slash command ──────────────────────────────────────────────
-  // The user can type /hello to trigger this command.
-  pi.registerCommand("hello", {
-    description: "Say hello from the template package",
-    handler: async (args, ctx) => {
-      const name = args?.trim() || "world";
-      ctx.ui.notify(`Hello, ${name}! 👋`, "info");
-    },
-  });
-
-  // ── 2b. Slash command with TUI ─────────────────────────────────────
-  // The user can type /pick to open an interactive selection dialog.
+  // Slash command with TUI: the user can type /pick to open a selection dialog.
   pi.registerCommand("pick", {
     description: "Pick an item from a selection dialog",
     handler: async (_args, ctx) => {
@@ -88,11 +59,5 @@ export default function (pi: ExtensionAPI) {
         ctx.ui.notify(`Selected: ${result}`, "info");
       }
     },
-  });
-
-  // ── 3. Event handler ──────────────────────────────────────────────
-  // Fires when a session starts (startup, reload, new, resume, fork).
-  pi.on("session_start", async (_event, ctx) => {
-    ctx.ui.notify("📦 pi-setup loaded!", "info");
   });
 }

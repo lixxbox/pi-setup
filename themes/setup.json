@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/badlogic/pi-mono/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json",
-  "name": "template",
+  "name": "setup",
   "vars": {
     "blue": "#61afef",
     "green": "#98c379",

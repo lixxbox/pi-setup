@@ -33,10 +33,7 @@ pi -e .
 
 | Resource | Name | Description |
 | --- | --- | --- |
-| Tool | `hello` | Greets a name (LLM-callable) |
-| Command | `/hello` | Prints a greeting notification |
 | Command | `/pick` | Interactive selection dialog (`SelectList` TUI) |
-| Event | `session_start` | Shows a "package loaded" notification |
 
 These are placeholders — replace them with real functionality as needed.
 
@@ -54,8 +51,8 @@ No build step: pi loads the TypeScript sources directly via jiti.
 Test a change:
 
 ```bash
-pi -ne -e . --no-session -p "Call the hello tool with name Alice."
-pi -ne -e . --no-session     # interactive, for /hello and /pick
+pi -ne -e . --no-session -p "List the tools you have available."   # loads cleanly?
+pi -ne -e . --no-session                                            # interactive, for /pick
 ```
 
 `-ne` (`--no-extensions`) keeps globally installed extensions out of the way, so

@@ -11,7 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Personal fork of `pi-package-template`: metadata, README, AGENTS.md and license
   adapted to this repo; template demo skill and prompt template removed.
-- Sample extension with `hello` tool, `/hello` and `/pick` commands, and a
-  `session_start` event handler.
+- `/pick` command as a reference implementation of `ctx.ui.custom()` with a
+  `SelectList`.
 - `themes/setup.json` with the full set of 51 color tokens (based on the
   template theme).
+
+### Removed
+
+- Template demo code: `hello` tool, `/hello` command and the noisy
+  `session_start` notification.
+- `.agents/skills/pi-init` — the template initialization checklist, superseded
+  by the adapted README/AGENTS.md.

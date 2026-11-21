@@ -59,18 +59,21 @@ npm run format         # Format code only (biome format --write)
 
 There are three ways to test, depending on what you need:
 
-#### 1. Print mode (`-p`) — quick tool/functionality test
+#### 1. Print mode (`-p`) — quick functionality test
 
-Non-interactive, prints text output and exits. Best for verifying tools work.
+Non-interactive, prints text output and exits. Best for verifying that the
+extension loads and that tools work.
 
 ```bash
-# Test a tool (use -ne to skip other installed extensions)
-pi -ne -e . --no-session -p "Call the hello tool with name Alice. You MUST use the hello tool."
-# Output: The hello tool returned: Hello, Alice! 👋
-
-# Test with the bash tool to inspect what pi sees
+# Smoke test: does the extension load without errors? (use -ne to skip other installed extensions)
 pi -ne -e . --no-session -p "List the tools you have available."
+
+# Once the package has tools, call one explicitly
+pi -ne -e . --no-session -p "Call the <tool_name> tool with <args>. You MUST use the <tool_name> tool."
 ```
+
+Print mode cannot exercise slash commands or extension UI — use interactive mode
+for `/pick`.
 
 **Important:** Always use `-ne` (no-extensions) with `-e .` to avoid interference from globally installed extensions (like pi-mcp-adapter). Only the package being tested will load.
 
@@ -81,7 +84,7 @@ Full interactive session. Use this to test `/commands`, keyboard shortcuts, and 
 ```bash
 # Start interactive session with only this package loaded
 pi -ne -e . --no-session
-# Then type commands like: /hello Alice, /pick
+# Then type commands like: /pick
 ```
 
 #### 2b. Automated TUI testing with pilotty
@@ -132,7 +135,7 @@ agent.stdout.on("data", (chunk) => {
 setTimeout(() => {
   agent.stdin.write(JSON.stringify({
     type: "prompt",
-    message: "Call the hello tool with name AgentTest.",
+    message: "List the tools you have available.",
   }) + "\n");
 }, 3000);
 ```
