@@ -1,42 +1,48 @@
-# Pi Package Template — Agent Context
+# pi-setup — Agent Context
 
 ## Project Overview
 
-This is a **pi package template** — a starter kit for building [pi](https://pi.dev) packages. Packages bundle extensions, skills, prompt templates, and themes, and are distributed via npm or git.
+This is **my personal [pi](https://pi.dev) setup package** — a private, versioned
+bundle of the extensions and theme I use with pi. It is derived from
+`pi-package-template` but is **not published to npm** (`"private": true`); it is
+installed from the local checkout or from GitHub.
 
-Users fork this template to create their own pi packages. The sample code demonstrates all four resource types and should be replaced with real functionality.
+There is **no upstream user base**: breaking changes, renames and dropping
+resources are fine. Prefer keeping things minimal over keeping them
+API-compatible.
 
 **Tech Stack:** TypeScript (no build step — pi loads `.ts` directly via jiti), typebox for schemas, biome for lint/format.
 
 ### Structure
 
 ```
-extensions/index.ts    # Extension entry point (tools, commands, events)
-skills/hello/SKILL.md  # On-demand skill instructions
-prompts/hello.md       # Slash-command prompt template
-themes/template.json   # Theme with all 51 color tokens
-package.json           # Pi manifest, peer deps, npm publish config
-biome.json             # Linter/formatter config
-tsconfig.json          # Type checking only (noEmit)
+extensions/index.ts   # Extension entry point (tools, commands, events)
+themes/setup.json     # Theme with all 51 color tokens
+package.json          # Pi manifest, peer deps, dev scripts (private package)
+biome.json            # Linter/formatter config
+tsconfig.json         # Type checking only (noEmit)
+.agents/skills/       # Agent skills for developing this package
 ```
+
+Skills land in `skills/<name>/SKILL.md` and prompt templates in
+`prompts/<name>.md`. **When adding either, register the directory in the `pi`
+manifest in `package.json` and in `files`** — both are currently absent because
+the template samples were removed.
 
 ### Key Constraints
 
 - **No build step** — pi loads `.ts` via jiti. Never add a build/compile step.
 - **Peer dependencies** — `@earendil-works/pi-ai`, `@earendil-works/pi-coding-agent`, `@earendil-works/pi-tui`, `@earendil-works/pi-agent-core`, `typebox` are provided by pi at runtime. List them as `peerDependencies` with `"*"` range. Do not bundle them.
 - **2-space indentation** — Enforced by biome.
-- **Themes require all 51 color tokens** — See `themes/template.json` for the full list.
+- **Themes require all 51 color tokens** — See `themes/setup.json` for the full list.
 
 ---
 
-## Git and PR Conventions
+## Git Conventions
 
-- **Conventional commits** — `feat:`, `fix:`, `docs:`, `chore:`, `ci:`, `refactor:` prefixes. Releases are automated via release-please.
-- **Rebase merges only** — The repo does not allow squash or merge commits. Always use:
-  ```bash
-  gh pr merge <number> --rebase
-  ```
-- **Release PRs** — release-please automatically opens a Release PR when conventional commits land on `main`. Review the changelog, then merge it with `--rebase` to trigger `npm publish`.
+- **Conventional commits** — `feat:`, `fix:`, `docs:`, `chore:`, `ci:`, `refactor:` prefixes, so the history stays readable.
+- **No release automation** — this is a private package: no `npm publish`, no release-please. Bump `version` in `package.json` and add a `CHANGELOG.md` entry by hand when a change is worth marking.
+- **Commits go straight to `main`** — no PR workflow required for a single-maintainer private repo.
 
 ---
 
@@ -164,10 +170,14 @@ Clarify what the user needs:
 - Are there runtime dependencies (npm packages)?
 
 Read the relevant pi docs before implementing:
-- Extensions: `~/.local/share/npm/lib/node_modules/@earendil-works/pi-coding-agent/docs/extensions.md`
-- Skills: `~/.local/share/npm/lib/node_modules/@earendil-works/pi-coding-agent/docs/skills.md`
-- Themes: `~/.local/share/npm/lib/node_modules/@earendil-works/pi-coding-agent/docs/themes.md`
-- Packages: `~/.local/share/npm/lib/node_modules/@earendil-works/pi-coding-agent/docs/packages.md`
+- Extensions: `$(npm root -g)/@earendil-works/pi-coding-agent/docs/extensions.md`
+- Skills: `$(npm root -g)/@earendil-works/pi-coding-agent/docs/skills.md`
+- Themes: `$(npm root -g)/@earendil-works/pi-coding-agent/docs/themes.md`
+- Packages: `$(npm root -g)/@earendil-works/pi-coding-agent/docs/packages.md`
+
+If pi is installed under `~/.pi/agent/install/`, the same docs live at
+`~/.pi/agent/install/releases/<version>/node_modules/@earendil-works/pi-coding-agent/docs/`.
+Resolve `npm root -g` first and check the directory exists before quoting paths.
 
 ### Step 2: Implement
 
@@ -202,7 +212,7 @@ description: What this template does
 Template content here.
 ```
 
-**Theme** (`themes/name.json`): Must include all 51 color tokens. Copy `themes/template.json` as a starting point.
+**Theme** (`themes/name.json`): Must include all 51 color tokens. Copy `themes/setup.json` as a starting point.
 
 ### Step 3: Verify
 
@@ -262,15 +272,15 @@ Repeat steps 1-5 for each feature or fix. Keep commits small and focused.
 
 ---
 
-## Release Flow
+## Sync / Update Flow
 
-Releases are fully automated via CI/CD:
+This package is not published. To pick up changes on another machine:
 
-1. Push conventional commits to `main`
-2. release-please opens a Release PR with updated `CHANGELOG.md` + version bump
-3. Merge the Release PR → GitHub Release + `npm publish` happen automatically
+1. Commit and push to `main` (CI runs typecheck + lint).
+2. On the other machine: `pi update git:github.com/lixxbox/pi-setup`
+   (or `git pull` + `/reload` if it was installed from a local path).
 
-Users update with: `pi update`
+No version bump or release is required for updates to propagate.
 
 ---
 

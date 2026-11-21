@@ -1,48 +1,38 @@
 {
-  "name": "pi-package-template",
-  "version": "1.2.0",
-  "description": "A minimal starter template for building pi packages",
+  "name": "pi-setup",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal pi setup — extensions and theme for my own pi workflow",
   "type": "module",
   "license": "MIT",
-  "author": "S1M0N38",
+  "author": "lixxbox",
   "repository": {
     "type": "git",
-    "url": "https://github.com/S1M0N38/pi-package-template"
+    "url": "https://github.com/lixxbox/pi-setup"
   },
   "keywords": [
     "pi-package",
     "pi",
-    "pi-coding-agent"
+    "pi-coding-agent",
+    "setup"
   ],
   "files": [
     "extensions",
-    "skills",
-    "prompts",
     "themes",
     "README.md",
     "CHANGELOG.md",
     "LICENSE",
     "!.github"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
-    "test": "echo \"No tests yet\" && exit 0",
+    "typecheck": "tsc --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "format": "biome format --write .",
-    "typecheck": "tsc --noEmit"
+    "format": "biome format --write ."
   },
   "pi": {
     "extensions": [
       "./extensions"
-    ],
-    "skills": [
-      "./skills"
-    ],
-    "prompts": [
-      "./prompts"
     ],
     "themes": [
       "./themes"

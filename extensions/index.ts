@@ -1,12 +1,12 @@
 /**
- * Pi Package Template — Sample Extension
+ * pi-setup — personal extension
  *
- * This extension demonstrates the core extension capabilities:
- *   1. Custom tool (callable by the LLM)
- *   2. Slash command with TUI (callable by the user)
- *   3. Event handler (reacts to session lifecycle)
+ * Placeholder implementations of the core extension capabilities:
+ *   1. Custom tool (callable by the LLM)      — `hello`
+ *   2. Slash commands (callable by the user)  — `/hello`, `/pick`
+ *   3. Event handler (session lifecycle)      — `session_start`
  *
- * Remove or replace these with your own functionality.
+ * Replace these with real functionality as the setup grows.
  */
 
 import { DynamicBorder, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
@@ -93,6 +93,6 @@ export default function (pi: ExtensionAPI) {
   // ── 3. Event handler ──────────────────────────────────────────────
   // Fires when a session starts (startup, reload, new, resume, fork).
   pi.on("session_start", async (_event, ctx) => {
-    ctx.ui.notify("📦 Template package loaded!", "info");
+    ctx.ui.notify("📦 pi-setup loaded!", "info");
   });
 }
