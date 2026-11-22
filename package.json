@@ -36,11 +36,19 @@
       "./node_modules/pi-stuff/extensions/prd-loop-pro/index.ts",
       "./node_modules/pi-stuff/extensions/todos/index.ts"
     ],
+    "skills": [
+      "./node_modules/agent-stuff/skills/web-browser",
+      "./node_modules/agent-stuff/skills/github",
+      "./node_modules/agent-stuff/skills/pi-share",
+      "./node_modules/mattpocock-skills/skills/productivity/handoff"
+    ],
     "themes": [
       "./themes"
     ]
   },
   "dependencies": {
+    "agent-stuff": "github:mitsuhiko/agent-stuff",
+    "mattpocock-skills": "github:mattpocock/skills",
     "pi-stuff": "github:meteyou/pi-stuff"
   },
   "peerDependencies": {

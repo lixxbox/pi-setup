@@ -18,23 +18,29 @@ API-compatible.
 ```
 extensions/index.ts   # Extension entry point (tools, commands, events)
 themes/setup.json     # Theme with all 51 color tokens
-node_modules/pi-stuff # `pi-stuff` dependency: prd-loop-pro + todos extensions
+node_modules/          # git dependencies: pi-stuff, agent-stuff, mattpocock-skills
 package.json          # Pi manifest, peer deps, dev scripts (private package)
 biome.json            # Linter/formatter config
 tsconfig.json         # Type checking only (noEmit)
 .agents/skills/       # Agent skills for developing this package
 ```
 
-Third-party extensions are **not vendored**. `pi-stuff` is a git dependency
-(`github:meteyou/pi-stuff`, branch `master`, commit pinned in
-`package-lock.json`) and its two extensions are referenced through their
-`node_modules` paths in the `pi` manifest. Only those two paths load, not the
-other extensions `pi-stuff` ships.
+Third-party extensions and skills are **not vendored**. They come from three git
+dependencies, all on branch `master` with commits pinned in `package-lock.json`:
+
+| Dependency | What is loaded from it |
+| --- | --- |
+| `pi-stuff` (`github:meteyou/pi-stuff`) | the `prd-loop-pro` and `todos` extensions |
+| `agent-stuff` (`github:mitsuhiko/agent-stuff`) | the `web-browser`, `github` and `pi-share` skills |
+| `mattpocock-skills` (`github:mattpocock/skills`) | the `handoff` skill |
+
+Each is referenced through its `node_modules` path in the `pi` manifest, which
+acts as a filter: the other resources those repos ship stay unloaded.
 
 Skills land in `skills/<name>/SKILL.md` and prompt templates in
 `prompts/<name>.md`. **When adding either, register the directory in the `pi`
-manifest in `package.json` and in `files`** — both are currently absent because
-the template samples were removed.
+manifest in `package.json` and in `files`** — neither is registered right now
+(the template samples were removed, and there is no local `skills/` directory).
 
 ### Key Constraints
 
@@ -300,6 +306,6 @@ No version bump or release is required for updates to propagate.
 - **Importing from wrong package** — Use `import type { ExtensionAPI } from "@earendil-works/pi-coding-agent"` (type import)
 - **Missing `export default function`** — Extensions must export a default factory function
 - **Adding runtime deps as devDependencies** — Runtime npm packages go in `dependencies`, not `devDependencies`
-- **Forgetting `npm install` after changing dependencies** — local installs are not installed by pi; without `node_modules/pi-stuff` the two `pi-stuff` extension paths fail to load and pi aborts with a load error
+- **Forgetting `npm install` after changing dependencies** — local installs are not installed by pi; without `node_modules/` the extension and skill paths in the `pi` manifest fail to load and pi aborts with a load error
 - **Incomplete themes** — Pi requires all 51 color tokens; partial themes cause errors
 - **Pinning peer deps** — Peer dependencies must use `"*"` range, not `"^0.70.0"` etc.

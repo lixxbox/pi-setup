@@ -15,9 +15,13 @@ Loaded by pi (declared in the `pi` manifest in `package.json`):
 | `setup` theme | Custom color scheme, all 51 tokens required by pi | `themes/setup.json` |
 | `/prd-loop-pro`, `/ralph-pro` commands | Autonomous PRD task orchestrator with review-fix pipeline | `node_modules/pi-stuff` (dependency) |
 | `todo` tool, `/todos` command | File-based todo manager with claiming, locking and TUI | `node_modules/pi-stuff` (dependency) |
+| `web-browser` skill | Drive Chrome/Chromium over CDP: navigate, fill forms, screenshots | `node_modules/agent-stuff` (dependency) |
+| `github` skill | `gh` CLI for issues, PRs, CI runs and API queries | `node_modules/agent-stuff` (dependency) |
+| `pi-share` skill | Load session transcripts from pi-share URLs | `node_modules/agent-stuff` (dependency) |
+| `/handoff` skill | Compact the conversation into a handoff document (`disable-model-invocation`) | `node_modules/mattpocock-skills` (dependency) |
 
-Only the two named `pi-stuff` files load, not the other extensions that package
-ships — the paths in the `pi` manifest act as a filter.
+Only the paths named in the `pi` manifest load — not the other extensions and
+skills that `pi-stuff`, `agent-stuff` and `mattpocock-skills` ship.
 
 Repo tooling (not loaded by pi):
 
@@ -41,7 +45,7 @@ pi install /path/to/pi-setup
 Use the absolute path — a relative path in the settings file is resolved
 relative to that file, so it breaks when the checkout moves. Local installs are
 loaded in place without copying, and pi does not run `npm install` for them, so
-run it once yourself to fetch the `pi-stuff` dependency:
+run it once yourself to fetch the git dependencies:
 
 ```bash
 npm install
@@ -60,7 +64,8 @@ pi install git:github.com/lixxbox/pi-setup
 
 Pi clones the repo, reconciles it to the configured ref (default branch unless
 you append `@<tag-or-commit>`, e.g. `git:github.com/lixxbox/pi-setup@v0.1.0`),
-and installs the dependencies, so `pi-stuff` is fetched automatically.
+and installs the dependencies, so `pi-stuff`, `agent-stuff` and
+`mattpocock-skills` are fetched automatically.
 
 ### Without installing
 
@@ -77,7 +82,7 @@ pi -e /path/to/pi-setup     # or: pi -e git:github.com/lixxbox/pi-setup
 | Any package | `pi update --extensions` (all packages) |
 | git source | `pi update git:github.com/lixxbox/pi-setup` |
 | Local path | `git pull` in the checkout, then `/reload` in pi |
-| `pi-stuff` dependency | `npm update pi-stuff` in the checkout (follows the `master` branch), then `/reload` |
+| Git dependencies | `npm update` in the checkout (they follow their `master` branches), then `/reload` |
 | Pi itself + all packages | `pi update --all` |
 
 Additional commands:
