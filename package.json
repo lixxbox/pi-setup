@@ -32,11 +32,16 @@
   },
   "pi": {
     "extensions": [
-      "./extensions"
+      "./extensions",
+      "./node_modules/pi-stuff/extensions/prd-loop-pro/index.ts",
+      "./node_modules/pi-stuff/extensions/todos/index.ts"
     ],
     "themes": [
       "./themes"
     ]
+  },
+  "dependencies": {
+    "pi-stuff": "github:meteyou/pi-stuff"
   },
   "peerDependencies": {
     "@earendil-works/pi-agent-core": "*",

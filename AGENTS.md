@@ -18,11 +18,18 @@ API-compatible.
 ```
 extensions/index.ts   # Extension entry point (tools, commands, events)
 themes/setup.json     # Theme with all 51 color tokens
+node_modules/pi-stuff # `pi-stuff` dependency: prd-loop-pro + todos extensions
 package.json          # Pi manifest, peer deps, dev scripts (private package)
 biome.json            # Linter/formatter config
 tsconfig.json         # Type checking only (noEmit)
 .agents/skills/       # Agent skills for developing this package
 ```
+
+Third-party extensions are **not vendored**. `pi-stuff` is a git dependency
+(`github:meteyou/pi-stuff`, branch `master`, commit pinned in
+`package-lock.json`) and its two extensions are referenced through their
+`node_modules` paths in the `pi` manifest. Only those two paths load, not the
+other extensions `pi-stuff` ships.
 
 Skills land in `skills/<name>/SKILL.md` and prompt templates in
 `prompts/<name>.md`. **When adding either, register the directory in the `pi`
@@ -293,5 +300,6 @@ No version bump or release is required for updates to propagate.
 - **Importing from wrong package** — Use `import type { ExtensionAPI } from "@earendil-works/pi-coding-agent"` (type import)
 - **Missing `export default function`** — Extensions must export a default factory function
 - **Adding runtime deps as devDependencies** — Runtime npm packages go in `dependencies`, not `devDependencies`
+- **Forgetting `npm install` after changing dependencies** — local installs are not installed by pi; without `node_modules/pi-stuff` the two `pi-stuff` extension paths fail to load and pi aborts with a load error
 - **Incomplete themes** — Pi requires all 51 color tokens; partial themes cause errors
 - **Pinning peer deps** — Peer dependencies must use `"*"` range, not `"^0.70.0"` etc.
