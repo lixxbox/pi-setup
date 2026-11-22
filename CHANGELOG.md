@@ -32,3 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `session_start` notification.
 - `.agents/skills/pi-init` — the template initialization checklist, superseded
   by the adapted README/AGENTS.md.
+- `pi-share` skill: session transcripts are not shared from this setup, so
+  loading them is dead weight. `agent-stuff` stays as a dependency for the
+  `web-browser` and `github` skills.

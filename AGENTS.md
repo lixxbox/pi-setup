@@ -32,7 +32,7 @@ package (range in `package.json`, resolved version pinned in the lockfile):
 | Dependency | What is loaded from it |
 | --- | --- |
 | `pi-stuff` (`github:meteyou/pi-stuff`, installed as `metes-pi-stuff`) | the `prd-loop-pro` and `todos` extensions |
-| `agent-stuff` (`github:mitsuhiko/agent-stuff`) | the `web-browser`, `github` and `pi-share` skills |
+| `agent-stuff` (`github:mitsuhiko/agent-stuff`) | the `web-browser` and `github` skills |
 | `mattpocock-skills` (`github:mattpocock/skills`) | the `handoff` skill |
 | `pi-ui-extension` (`npm:pi-ui-extension`) | the fullscreen sidebar extension: SESSIONS, CTX, VIEW, footer |
 

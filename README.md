@@ -17,7 +17,6 @@ Loaded by pi (declared in the `pi` manifest in `package.json`):
 | `todo` tool, `/todos` command | File-based todo manager with claiming, locking and TUI | `node_modules/metes-pi-stuff` (dependency) |
 | `web-browser` skill | Drive Chrome/Chromium over CDP: navigate, fill forms, screenshots | `node_modules/agent-stuff` (dependency) |
 | `github` skill | `gh` CLI for issues, PRs, CI runs and API queries | `node_modules/agent-stuff` (dependency) |
-| `pi-share` skill | Load session transcripts from pi-share URLs | `node_modules/agent-stuff` (dependency) |
 | `/handoff` skill | Compact the conversation into a handoff document (`disable-model-invocation`) | `node_modules/mattpocock-skills` (dependency) |
 | Fullscreen sidebar, `/sessions-manager`, `/tool-view`, `Ctrl+Shift+O` | SESSIONS (switch/rename/pin/delete sessions, resource shortcuts), CTX (context composition, TTFT/TPS), VIEW (Normal/Focus/Compact/Hidden for tool output and Thinking), tool/MCP counters, directory+branch footer | `node_modules/pi-ui-extension` (dependency) |
 

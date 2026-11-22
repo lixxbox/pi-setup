@@ -44,7 +44,6 @@
       "./node_modules/metes-pi-stuff/skills/prd-to-todos",
       "./node_modules/agent-stuff/skills/web-browser",
       "./node_modules/agent-stuff/skills/github",
-      "./node_modules/agent-stuff/skills/pi-share",
       "./node_modules/mattpocock-skills/skills/productivity/handoff"
     ],
     "themes": [
