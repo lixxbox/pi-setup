@@ -54,7 +54,8 @@
     "agent-stuff": "github:mitsuhiko/agent-stuff",
     "mattpocock-skills": "github:mattpocock/skills",
     "metes-pi-stuff": "github:meteyou/pi-stuff",
-    "pi-ui-extension": "^1.20.5"
+    "pi-ui-extension": "^1.20.5",
+    "ws": "^8.23.0"
   },
   "peerDependencies": {
     "@earendil-works/pi-agent-core": "*",

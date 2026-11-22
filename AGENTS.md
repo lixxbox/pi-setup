@@ -39,6 +39,12 @@ package (range in `package.json`, resolved version pinned in the lockfile):
 Each is referenced through its `node_modules` path in the `pi` manifest, which
 acts as a filter: the other resources those repos ship stay unloaded.
 
+`ws` is a direct dependency even though no local code imports it: the
+`web-browser` skill's scripts import it, but `agent-stuff` ships no installed
+`node_modules` for its nested `scripts/package.json`. Listing it here lets Node
+resolve it from this package root, so the skill survives a re-clone by
+`pi install`.
+
 `pi-ui-extension` only renders in **fullscreen TUI mode** (`--tui-mode
 fullscreen`, the default) on a wide terminal, and keeps its own state under
 `<agent dir>/pi-ui-extension/` (sidebar width, pinned sessions, tool view mode).

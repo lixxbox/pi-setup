@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and VIEW panels, `/sessions-manager`, `/tool-view` and the directory/branch
   footer. Bumped the `@earendil-works/pi-*` dev dependencies to `^1.6.0` because
   the extension requires Pi >= 1.5.0.
+- `ws` as a direct dependency. It is not used by our own code: the `web-browser`
+  skill's scripts import it (`scripts/cdp.js`), but that repo does not run an
+  `npm install` for its nested `scripts/package.json`. Depending on it here makes
+  Node resolve it from this package root, so the skill keeps working after
+  `pi install` re-clones the dependency tree.
 
 ### Fixed
 
