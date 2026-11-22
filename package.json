@@ -34,7 +34,8 @@
     "extensions": [
       "./extensions",
       "./node_modules/metes-pi-stuff/extensions/prd-loop-pro/index.ts",
-      "./node_modules/metes-pi-stuff/extensions/todos/index.ts"
+      "./node_modules/metes-pi-stuff/extensions/todos/index.ts",
+      "./node_modules/pi-ui-extension/extensions/index.ts"
     ],
     "skills": [
       "./skills",
@@ -53,7 +54,8 @@
   "dependencies": {
     "agent-stuff": "github:mitsuhiko/agent-stuff",
     "mattpocock-skills": "github:mattpocock/skills",
-    "metes-pi-stuff": "github:meteyou/pi-stuff"
+    "metes-pi-stuff": "github:meteyou/pi-stuff",
+    "pi-ui-extension": "^1.20.5"
   },
   "peerDependencies": {
     "@earendil-works/pi-agent-core": "*",
@@ -64,8 +66,8 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.14",
-    "@earendil-works/pi-ai": "^0.74.0",
-    "@earendil-works/pi-coding-agent": "^0.74.0",
+    "@earendil-works/pi-ai": "^1.6.0",
+    "@earendil-works/pi-coding-agent": "^1.6.0",
     "typebox": "^1.1.24",
     "typescript": "^5.0.0"
   }

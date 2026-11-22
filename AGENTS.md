@@ -18,7 +18,7 @@ API-compatible.
 ```
 extensions/index.ts   # Extension entry point (tools, commands, events)
 themes/setup.json     # Theme with all 51 color tokens
-node_modules/          # git dependencies: pi-stuff, agent-stuff, mattpocock-skills
+node_modules/          # dependencies: pi-stuff, agent-stuff, mattpocock-skills, pi-ui-extension
 package.json          # Pi manifest, peer deps, dev scripts (private package)
 biome.json            # Linter/formatter config
 tsconfig.json         # Type checking only (noEmit)
@@ -26,16 +26,22 @@ tsconfig.json         # Type checking only (noEmit)
 ```
 
 Third-party extensions and skills are **not vendored**. They come from three git
-dependencies, all on branch `master` with commits pinned in `package-lock.json`:
+dependencies (branch `master`, commits pinned in `package-lock.json`) and one npm
+package (range in `package.json`, resolved version pinned in the lockfile):
 
 | Dependency | What is loaded from it |
 | --- | --- |
-| `pi-stuff` (`github:meteyou/pi-stuff`) | the `prd-loop-pro` and `todos` extensions |
+| `pi-stuff` (`github:meteyou/pi-stuff`, installed as `metes-pi-stuff`) | the `prd-loop-pro` and `todos` extensions |
 | `agent-stuff` (`github:mitsuhiko/agent-stuff`) | the `web-browser`, `github` and `pi-share` skills |
 | `mattpocock-skills` (`github:mattpocock/skills`) | the `handoff` skill |
+| `pi-ui-extension` (`npm:pi-ui-extension`) | the fullscreen sidebar extension: SESSIONS, CTX, VIEW, footer |
 
 Each is referenced through its `node_modules` path in the `pi` manifest, which
 acts as a filter: the other resources those repos ship stay unloaded.
+
+`pi-ui-extension` only renders in **fullscreen TUI mode** (`--tui-mode
+fullscreen`, the default) on a wide terminal, and keeps its own state under
+`<agent dir>/pi-ui-extension/` (sidebar width, pinned sessions, tool view mode).
 
 Skills land in `skills/<name>/SKILL.md` and prompt templates in
 `prompts/<name>.md`. **When adding either, register the directory in the `pi`

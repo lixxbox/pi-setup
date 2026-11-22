@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `SelectList`.
 - `themes/setup.json` with the full set of 51 color tokens (based on the
   template theme).
+- `pi-ui-extension` as an npm dependency: fullscreen sidebar with SESSIONS, CTX
+  and VIEW panels, `/sessions-manager`, `/tool-view` and the directory/branch
+  footer. Bumped the `@earendil-works/pi-*` dev dependencies to `^1.6.0` because
+  the extension requires Pi >= 1.5.0.
 
 ### Removed
 
