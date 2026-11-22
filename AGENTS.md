@@ -313,5 +313,6 @@ No version bump or release is required for updates to propagate.
 - **Missing `export default function`** — Extensions must export a default factory function
 - **Adding runtime deps as devDependencies** — Runtime npm packages go in `dependencies`, not `devDependencies`
 - **Forgetting `npm install` after changing dependencies** — local installs are not installed by pi; without `node_modules/` the extension and skill paths in the `pi` manifest fail to load and pi aborts with a load error
+- **Dropping the `.npmrc`** — npm 12 defaults `allow-git` to `none`, so without `allow-git=root` in `.npmrc` every install (`pi install git:...` included) dies with `EALLOWGIT` on the `github:` dependencies
 - **Incomplete themes** — Pi requires all 51 color tokens; partial themes cause errors
 - **Pinning peer deps** — Peer dependencies must use `"*"` range, not `"^0.70.0"` etc.

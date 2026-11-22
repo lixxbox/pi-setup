@@ -52,8 +52,12 @@ loaded in place without copying, and pi does not run `npm install` for them, so
 run it once yourself to fetch the dependencies:
 
 ```bash
-npm install                  # or: npm install --allow-git=all (npm 12 blocks git deps by default)
+npm install
 ```
+
+No extra flags needed: the committed `.npmrc` sets `allow-git=root`, because
+npm 12 defaults to `allow-git=none` and would otherwise refuse the `github:`
+dependencies with `EALLOWGIT`.
 
 Edits are picked up with `/reload`.
 
@@ -69,7 +73,10 @@ pi install git:github.com/lixxbox/pi-setup
 Pi clones the repo, reconciles it to the configured ref (default branch unless
 you append `@<tag-or-commit>`, e.g. `git:github.com/lixxbox/pi-setup@v0.1.0`),
 and installs the dependencies, so `pi-stuff`, `agent-stuff`,
-`mattpocock-skills` and `pi-ui-extension` are fetched automatically.
+`mattpocock-skills` and `pi-ui-extension` are fetched automatically. The
+`github:` specs are fetched over SSH (`git+ssh://git@github.com/...`), so a
+GitHub SSH key must be available; `.npmrc` (`allow-git=root`) is what lets the
+install through on npm 12.
 
 ### Without installing
 

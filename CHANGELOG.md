@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   footer. Bumped the `@earendil-works/pi-*` dev dependencies to `^1.6.0` because
   the extension requires Pi >= 1.5.0.
 
+### Fixed
+
+- `pi install git:github.com/lixxbox/pi-setup` failed with `EALLOWGIT` under
+  npm 12, which defaults `allow-git` to `none`. Added a committed `.npmrc` with
+  `allow-git=root` so plain `npm install` accepts the `github:` dependencies.
+
 ### Removed
 
 - Template demo code: `hello` tool, `/hello` command and the noisy
