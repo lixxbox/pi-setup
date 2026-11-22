@@ -33,10 +33,14 @@
   "pi": {
     "extensions": [
       "./extensions",
-      "./node_modules/pi-stuff/extensions/prd-loop-pro/index.ts",
-      "./node_modules/pi-stuff/extensions/todos/index.ts"
+      "./node_modules/metes-pi-stuff/extensions/prd-loop-pro/index.ts",
+      "./node_modules/metes-pi-stuff/extensions/todos/index.ts"
     ],
     "skills": [
+      "./skills",
+      "./node_modules/metes-pi-stuff/skills/grill-me",
+      "./node_modules/metes-pi-stuff/skills/write-a-prd",
+      "./node_modules/metes-pi-stuff/skills/prd-to-todos",
       "./node_modules/agent-stuff/skills/web-browser",
       "./node_modules/agent-stuff/skills/github",
       "./node_modules/agent-stuff/skills/pi-share",
@@ -49,7 +53,7 @@
   "dependencies": {
     "agent-stuff": "github:mitsuhiko/agent-stuff",
     "mattpocock-skills": "github:mattpocock/skills",
-    "pi-stuff": "github:meteyou/pi-stuff"
+    "metes-pi-stuff": "github:meteyou/pi-stuff"
   },
   "peerDependencies": {
     "@earendil-works/pi-agent-core": "*",
